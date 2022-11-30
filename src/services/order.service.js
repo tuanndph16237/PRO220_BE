@@ -1,29 +1,29 @@
 import {
-    Order
+    OrderModel
 } from "../models";
 
 export const getAll = async () => {
-    return Order.find();
+    return await OrderModel.find();
 }
 
 export const getById = async (_id) => {
-    return Order.findOne({
+    return await OrderModel.findOne({
         _id
     }).exec();
 }
 
 export const create = async (data) => {
-    return new Order(data).save();
+    return await new OrderModel(data).save()
 }
 
 export const removeById = async (_id) => {
-    return Order.findOneAndDelete({
+    return await OrderModel.findOneAndDelete({
         _id
     }).exec()
 }
 
 export const updateById = async (_id, data) => {
-    return Order.findOneAndUpdate({
+    return await OrderModel.findOneAndUpdate({
         _id
     }, data, {
         new: true

@@ -1,8 +1,10 @@
-import orderModel from "../models/order.model";
+import {
+    orderService
+} from '../services'
 
-export const list = async (req, res) => {
+export const getAll = async (req, res) => {
     try {
-        const data = await orderModel.find();
+        const data = await orderService.getAll();
         res.json(data);
     } catch (error) {
         res.status(400).json({
@@ -11,11 +13,12 @@ export const list = async (req, res) => {
     }
 }
 
-export const read = async (req, res) => {
+
+export const getById = async (req, res) => {
     try {
-        const data = await orderModel.findOne({
-            _id: req.params.id
-        }).select("-__v").populate(req.query["_expand"]).exec();
+        const data = await orderService.getById(
+            req.params.id
+        )
         res.json(data);
     } catch (error) {
         res.status(400).json({
@@ -24,9 +27,12 @@ export const read = async (req, res) => {
     }
 }
 
-export const add = async (req, res) => {
+
+export const create = async (req, res) => {
     try {
-        const data = await new orderModel(req.body).save();
+        console.log(req.body);
+        // const data = await new orderModel(data).save();
+        const data = await orderService.create(req.body);
         res.json(data)
     } catch (error) {
         res.status(400).json({
@@ -35,11 +41,11 @@ export const add = async (req, res) => {
     }
 }
 
-export const remove = async (req, res) => {
+
+export const removeById = async (req, res) => {
+
     try {
-        const data = await orderModel.findOneAndDelete({
-            _id: req.params.id,
-        }).exec()
+        const data = await orderService.removeById(req.params.id)
         res.json(data)
     } catch (error) {
         res.status(400).json({
@@ -48,13 +54,11 @@ export const remove = async (req, res) => {
     }
 }
 
-export const update = async (req, res) => {
+
+export const updateById = async (req, res) => {
+
     try {
-        const data = await orderModel.findOneAndUpdate({
-            _id: req.params.id
-        }, req.body, {
-            new: true
-        })
+        const data = await orderService.updateById(req.params.id, req.body)
         res.json(data)
     } catch (error) {
         res.status(400).json({
