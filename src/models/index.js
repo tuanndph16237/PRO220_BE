@@ -1,1 +1,1 @@
-module.exports.Order = require('./order.model');
+module.exports.OrderModel = require('./order.model');
