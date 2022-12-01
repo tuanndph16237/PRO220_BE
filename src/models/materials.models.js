@@ -13,6 +13,10 @@ const materialsSchema = mongoose.Schema(
         image: {
             type: String,
         },
+        showroomId: {
+            type: mongoose.ObjectId,
+            ref: 'showroom',
+        },
     },
     {
         timestamps: true,
