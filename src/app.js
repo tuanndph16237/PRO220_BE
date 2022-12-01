@@ -3,10 +3,11 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import morgan from 'morgan';
-import orderRouter from './routes/order.router'
-import showroomRouter from './routes/showroom.router'
+import orderRouter from './routes/order.router';
+import showroomRouter from './routes/showroom.router';
 import ApiError from './utils/ApiError';
 import routercateService from './routes/cateService.router';
+import routerMaterials from './routes/materials.router';
 import httpStatus from 'http-status';
 const app = express();
 
@@ -22,8 +23,9 @@ app.options('*', cors());
 //use routers
 
 app.use('/api', orderRouter);
-app.use('/api',showroomRouter)
+app.use('/api', showroomRouter);
 app.use('/api', routercateService);
+app.use('/api', routerMaterials);
 
 // parse urlencoded request body
 app.use(
