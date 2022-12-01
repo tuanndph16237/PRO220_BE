@@ -24,8 +24,6 @@ export const getById = async (req, res) => {
 
 export const create = async (req, res) => {
     try {
-        console.log(req.body);
-        // const data = await new orderModel(data).save();
         const data = await materialsService.create(req.body);
         res.json(data);
     } catch (error) {

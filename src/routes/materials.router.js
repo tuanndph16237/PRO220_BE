@@ -1,18 +1,18 @@
 import express from 'express';
-import { materialsController } from '../controllers';
+import { materialController } from '../controllers';
 import validate from '../middlewares/validate';
-import { materialsValidate } from '../validations';
+import { materialValidation } from '../validations';
 
 const router = express.Router();
 
-router.get('/materials', materialsController.getAll);
-router.get('/materials/:id', validate(materialsValidate.getById), materialsController.getById);
-router.post('/materials', validate(materialsValidate.createMaterials), materialsController.create);
-router.delete('/materials/:id', validate(materialsValidate.getById), materialsController.removeById);
+router.get('/material', materialController.getAll);
+router.get('/material/:id', validate(materialValidation.getById), materialController.getById);
+router.post('/material', validate(materialValidation.createMaterials), materialController.create);
+router.delete('/material/:id', validate(materialValidation.getById), materialController.removeById);
 router.patch(
-    '/materials/:id',
-    validate(materialsValidate.createMaterials),
-    validate(materialsValidate.getById),
-    materialsController.updateById,
+    '/material/:id',
+    validate(materialValidation.createMaterials),
+    validate(materialValidation.getById),
+    materialController.updateById,
 );
 export default router;
