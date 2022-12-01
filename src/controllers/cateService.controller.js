@@ -15,11 +15,6 @@ export const getAll = async (req, res) => {
 export const getById = async (req, res) => {
     try {
         const category = await cateServices.getById(req.params.id);
-        // const order = await orderController
-        //     .find({ category: category })
-        //     .populate('category')
-        //     .select('-category')
-        //     .exec();
         res.json(category);
     } catch (error) {
         res.status(400).json({
@@ -30,9 +25,8 @@ export const getById = async (req, res) => {
 
 export const create = async (req, res) => {
     try {
-        console.log(req.body);
-        // const category = await cateServices.create(req.body);
-        // res.json(category);
+        const category = await cateServices.create(req.body);
+        res.json(category);
     } catch (error) {
         res.status(400).json({
             error: 'khong them duoc',
