@@ -17,7 +17,7 @@ const orderSchema = mongoose.Schema(
         },
         cateStore: {
             type: mongoose.ObjectId,
-            ref: 'cateStore',
+            ref: 'showroom',
         },
         cateService: {
             type: mongoose.ObjectId,
