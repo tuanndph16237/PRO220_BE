@@ -1,9 +1,10 @@
-import orderModel from '../models/order.model';
+import { cateServices } from '../services';
+import { orderController } from './cateService.controller';
 
 export const getAll = async (req, res) => {
     try {
-        const data = await orderService.getAll();
-        res.json(data);
+        const category = await cateServices.getAll();
+        res.json(category);
     } catch (error) {
         res.status(400).json({
             error: 'khong co don nao',
@@ -13,8 +14,13 @@ export const getAll = async (req, res) => {
 
 export const getById = async (req, res) => {
     try {
-        const data = await orderService.getById(req.params.id);
-        res.json(data);
+        const category = await cateServices.getById(req.params.id);
+        // const order = await orderController
+        //     .find({ category: category })
+        //     .populate('category')
+        //     .select('-category')
+        //     .exec();
+        res.json(category);
     } catch (error) {
         res.status(400).json({
             error: 'khong tim thay don nao',
@@ -25,9 +31,8 @@ export const getById = async (req, res) => {
 export const create = async (req, res) => {
     try {
         console.log(req.body);
-        // const data = await new orderModel(data).save();
-        const data = await orderService.create(req.body);
-        res.json(data);
+        const category = await cateServices.create(req.body);
+        res.json(category);
     } catch (error) {
         res.status(400).json({
             error: 'khong them duoc',
@@ -37,8 +42,8 @@ export const create = async (req, res) => {
 
 export const removeById = async (req, res) => {
     try {
-        const data = await orderService.removeById(req.params.id);
-        res.json(data);
+        const category = await cateServices.removeById(req.params.id);
+        res.json(category);
     } catch (error) {
         res.status(400).json({
             error: 'khong xoa duoc',
@@ -48,8 +53,8 @@ export const removeById = async (req, res) => {
 
 export const updateById = async (req, res) => {
     try {
-        const data = await orderService.updateById(req.params.id, req.body);
-        res.json(data);
+        const category = await cateServices.updateById(req.params.id, req.body);
+        res.json(category);
     } catch (error) {
         res.status(400).json({
             error: 'khong sua duoc',
