@@ -4,6 +4,10 @@ export const create = {
     body: Joi.object().keys({
         name: Joi.string().required(),
         phone: Joi.string().required(),
+        address:Joi.string().required(),
+        images:Joi.array().items(Joi.string()).required(),
+        longitude:Joi.string().required(),
+        latitude:Joi.string().required()
     })
 }
 
@@ -17,5 +21,9 @@ export const updateById = {
     body: Joi.object().keys({
         name: Joi.string().required(),
         phone: Joi.string().required(),
+        address:Joi.string().required(),
+        images:Joi.array().items(Joi.string()).required(),
+        longitude:Joi.string().required(),
+        latitude:Joi.string().required()
     })
 }
