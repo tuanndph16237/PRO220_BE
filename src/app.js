@@ -6,7 +6,7 @@ import morgan from 'morgan';
 import orderRouter from './routes/order.router';
 import showroomRouter from './routes/showroom.router';
 import ApiError from './utils/ApiError';
-import routercateService from './routes/cateService.router';
+import BannerRouter from './routes/banner.router';
 import routerMaterials from './routes/materials.router';
 import httpStatus from 'http-status';
 import routerAccount from './routes/acount.router'
@@ -23,11 +23,11 @@ app.use(cors());
 app.options('*', cors());
 
 //use routers
+app.use('/api', BannerRouter);
 
 app.use('/api', orderRouter);
 app.use('/api',routerAccount)
 app.use('/api',showroomRouter)
-app.use('/api', routercateService);
 app.use('/api', routerMaterials);
 
 // parse urlencoded request body
@@ -38,8 +38,8 @@ app.use(
 );
 
 // send back a 404 error for any unknown api request
-app.use((req, res, next) => {
-    next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
+app.use((req, res, next) => {                      
+    next(new ApiError(httpStatus.NOT_FOUND, 'Không tồn tai api này vui lòng thử lại!'));
 });
 
 //conect db
