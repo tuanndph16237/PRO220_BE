@@ -1,9 +1,8 @@
-import { cateServices } from '../services';
-import { orderController } from './cateService.controller';
+import { BannerService } from '../services';
 
 export const getAll = async (req, res) => {
     try {
-        const category = await cateServices.getAll();
+        const category = await BannerService.getAll();
         res.json(category);
     } catch (error) {
         res.status(400).json({
@@ -14,7 +13,7 @@ export const getAll = async (req, res) => {
 
 export const getById = async (req, res) => {
     try {
-        const category = await cateServices.getById(req.params.id);
+        const category = await BannerService.getById(req.params.id);
         res.json(category);
     } catch (error) {
         res.status(400).json({
@@ -25,7 +24,7 @@ export const getById = async (req, res) => {
 
 export const create = async (req, res) => {
     try {
-        const category = await cateServices.create(req.body);
+        const category = await BannerService.create(req.body);
         res.json(category);
     } catch (error) {
         res.status(400).json({
@@ -36,7 +35,7 @@ export const create = async (req, res) => {
 
 export const removeById = async (req, res) => {
     try {
-        const category = await cateServices.removeById(req.params.id);
+        const category = await BannerService.removeById(req.params.id);
         res.json(category);
     } catch (error) {
         res.status(400).json({
@@ -47,7 +46,7 @@ export const removeById = async (req, res) => {
 
 export const updateById = async (req, res) => {
     try {
-        const category = await cateServices.updateById(req.params.id, req.body);
+        const category = await BannerService.updateById(req.params.id, req.body);
         res.json(category);
     } catch (error) {
         res.status(400).json({
