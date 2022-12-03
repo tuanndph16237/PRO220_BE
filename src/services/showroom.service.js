@@ -13,7 +13,20 @@ export const getById = (_id) => {
 }
 
 export const create = (data) => {
-    return new showroomModel(data).save()
+    const dataShowroom = {
+        name:data.name,
+        phone:data.phone,
+        address:data.address,
+        images:data.images,
+        location: {
+            type: 'Point',
+            coordinates: [
+              parseFloat(data.longitude),
+              parseFloat(data.latitude)
+            ]
+        }
+    }
+    return new showroomModel(dataShowroom).save()
 }
 
 export const removeById = (_id) => {
