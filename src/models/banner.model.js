@@ -27,6 +27,6 @@ const bannerSchema = mongoose.Schema(
 
 bannerSchema.plugin(mongoose_delete);
 
-const BannerModel = mongoose.model('bannerSchema', bannerSchema);
+const BannerModel = mongoose.model('banner', bannerSchema);
 
 module.exports = BannerModel;

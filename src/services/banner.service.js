@@ -5,8 +5,8 @@ export const getAll = async () => {
     return BannerModel.find({ deleted: false });
 };
 
-export const getById = async (_id) => {
-    return await BannerModel.findOne({ _id, deleted :false }).exec();
+export const getById = async (_id, filter = { deleted: false }) => {
+    return BannerModel.findOne({ _id, ...filter }).exec();
 };
 
 export const create = async (data) => {
@@ -15,11 +15,7 @@ export const create = async (data) => {
 
 export const removeById = async (_id) => {
     const bannerId = mongoose.Types.ObjectId(_id);
-   return BannerModel.delete({ _id: bannerId },(err,rs) => {
-    if(rs) {
-        return getById(_id)
-    }
-   });
+    return BannerModel.delete({ _id: bannerId });
 };
 
 export const updateById = async (_id, data) => {
