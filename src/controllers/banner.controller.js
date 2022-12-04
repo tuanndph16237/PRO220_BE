@@ -35,8 +35,9 @@ export const create = async (req, res) => {
 
 export const removeById = async (req, res) => {
     try {
-        const category = await BannerService.removeById(req.params.id);
-        res.json(category);
+        await BannerService.removeById(req.params.id);
+        const dataDeleted = await BannerService.getById(req.params.id, { deleted: true });
+        res.json(dataDeleted);
     } catch (error) {
         res.status(400).json({
             error: 'khong xoa duoc',
