@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+var mongoose_delete = require('mongoose-delete');
 const showroomSchema = mongoose.Schema({
     name: {
         type: String
@@ -18,7 +19,7 @@ const showroomSchema = mongoose.Schema({
     },
 })
 showroomSchema.index({ location: '2dsphere' })
-
+showroomSchema.plugin(mongoose_delete);
 const showroomModel = mongoose.model('showroom', showroomSchema);
 
 module.exports = showroomModel;
