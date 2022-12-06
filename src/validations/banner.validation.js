@@ -14,3 +14,9 @@ export const getById = {
         id: Joi.string().required(),
     }),
 };
+
+export const deleteByIds = {
+    body: Joi.object().keys({
+        ids: Joi.array().items(Joi.string()),
+    }),
+};
