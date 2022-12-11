@@ -9,8 +9,8 @@ import ApiError from './utils/ApiError';
 import BannerRouter from './routes/banner.router';
 import routerMaterials from './routes/materials.router';
 import httpStatus from 'http-status';
-import routerAccount from './routes/acount.router'
-const app = express()
+import routerAccount from './routes/acount.router';
+const app = express();
 // const app = express();
 
 //parse json request body
@@ -27,14 +27,13 @@ app.options('*', cors());
 app.use('/api', BannerRouter);
 
 app.use('/api', orderRouter);
-app.use('/api',routerAccount)
-app.use('/api',showroomRouter)
+app.use('/api', routerAccount);
+app.use('/api', showroomRouter);
 app.use('/api', routerMaterials);
 
-app.use('/' , (req,res) => {
-    res.json('Hello World')
-})
-
+app.use('/', (req, res) => {
+    res.json('Hello World');
+});
 
 // parse urlencoded request body
 app.use(
@@ -44,7 +43,7 @@ app.use(
 );
 
 // send back a 404 error for any unknown api request
-app.use((req, res, next) => {                      
+app.use((req, res, next) => {
     next(new ApiError(httpStatus.NOT_FOUND, 'Không tồn tai api này vui lòng thử lại!'));
 });
 
@@ -60,7 +59,7 @@ try {
 } catch (error) {
     console.log('CONNECTED FAILED', error.message);
 }
-
-app.listen(process.env.PORT || 8080, () => {
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
     console.log(`CONNECTED SUCCES PORT ${process.env.PORT}`);
 });
