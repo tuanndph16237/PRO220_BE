@@ -1,5 +1,7 @@
-export * as BannerController from './banner.controller';
-export * as orderController from './order.controller'
-export * as accountController from './account.controller'
-export * as showroomController from './showroom.controller'
-export * as materialController from './materials.controller';
+module.exports.BannerController = require('./banner.controller');
+module.exports.orderController = require('./order.controller');
+module.exports.accountController = require('./account.controller');
+module.exports.showroomController = require('./showroom.controller');
+module.exports.materialController = require('./materials.controller');
+
+
