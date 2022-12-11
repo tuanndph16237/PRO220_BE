@@ -1,6 +1,7 @@
-export * as orderValidation from './order.validation'
-export * as accountValidation from '../validations/account.vlidation'
-export * as showroomValidation from './showroom.validation'
-export * as BannerValidation from './banner.validation';
-export * as materialValidation from './materials.validation';
+module.exports.orderValidation = require('./order.validation');
+module.exports.accountValidation = require('./account.vlidation');
+module.exports.showroomValidation = require('./showroom.validation');
+module.exports.BannerValidation = require('./banner.validation');
+module.exports.materialValidation = require('./materials.validation');
+
 

@@ -2,9 +2,13 @@
   "name": "web_backend",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/app.js",
+  "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
-    "server": "nodemon ./src/app.js --exec babel-node -e js"
+    "start"  : "node index.js",
+    "server": "nodemon index.js --exec babel-node -e js"
   },
   "author": "",
   "license": "ISC",
