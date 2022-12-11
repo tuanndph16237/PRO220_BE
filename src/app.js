@@ -61,8 +61,6 @@ try {
     console.log('CONNECTED FAILED', error.message);
 }
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 8080, () => {
     console.log(`CONNECTED SUCCES PORT ${process.env.PORT}`);
 });
-
-module.exports = app

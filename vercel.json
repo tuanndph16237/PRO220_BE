@@ -1,6 +1,5 @@
 {
     "version": 2,
-    "name": "PRO220/BE",
     "builds": [
        { "src": "./app.js", "use": "@vercel/node" }
     ],
