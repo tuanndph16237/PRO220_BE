@@ -23,12 +23,17 @@ app.use(cors());
 app.options('*', cors());
 
 //use routers
+app.use('/' , (req,res) => {
+    res.json('Hello World')
+})
+
 app.use('/api', BannerRouter);
 
 app.use('/api', orderRouter);
 app.use('/api',routerAccount)
 app.use('/api',showroomRouter)
 app.use('/api', routerMaterials);
+
 
 // parse urlencoded request body
 app.use(
@@ -58,3 +63,5 @@ try {
 app.listen(process.env.PORT, () => {
     console.log(`CONNECTED SUCCES PORT ${process.env.PORT}`);
 });
+
+module.exports = app
