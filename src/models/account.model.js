@@ -13,7 +13,7 @@ const accountSchema = mongoose.Schema({
         required:true
     },
     number_phone:{
-        type:Number,
+        type:String,
         required:true
     },
     image:{
