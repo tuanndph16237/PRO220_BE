@@ -14,7 +14,7 @@ const orderSchema = mongoose.Schema(
             type: String,
         },
         status: {
-            default : ORDER_STATUS.initial.value,
+            default: ORDER_STATUS.initial.value,
             type: Number,
         },
         price: {
@@ -30,7 +30,7 @@ const orderSchema = mongoose.Schema(
             type: Date,
         },
         serviceType: {
-            default : SEVICE_TYPE.SHOWROOM,
+            default: SEVICE_TYPE.SHOWROOM,
             type: Number,
         },
         description: {
@@ -52,6 +52,22 @@ const orderSchema = mongoose.Schema(
         materialIds: {
             type: mongoose.ObjectId,
             ref: 'materialIds',
+        },
+        reasons: {
+            type: Array,
+            default: [],
+        },
+        //km xe chay
+        km: {
+            type: String,
+        },
+        // loai xe may
+        vehicleType: {
+            type: Number,
+        },
+        //bien so xe
+        licensePlates: {
+            type: String,
         },
     },
     {
