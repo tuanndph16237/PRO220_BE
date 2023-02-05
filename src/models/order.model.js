@@ -10,6 +10,9 @@ const orderSchema = mongoose.Schema(
         address: {
             type: String,
         },
+        email: {
+            type: String,
+        },
         number_phone: {
             type: String,
         },
@@ -50,8 +53,13 @@ const orderSchema = mongoose.Schema(
             ref: 'showroomId',
         },
         materialIds: {
-            type: mongoose.ObjectId,
-            ref: 'materialIds',
+            type : Array,
+            default : [],
+            ref : 'material'
+        },
+        materials: {
+            type: Array,
+            default: [],
         },
         reasons: {
             type: Array,

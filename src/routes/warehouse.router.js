@@ -22,5 +22,5 @@ router.patch(
     warehouseController.updateQuantityOnePartInWarehouse,
 );
 
-router.get('/warehouse', validate(warehouseValidation.materialFilter), warehouseController.filterMaterials);
+router.post('/warehouse/search?', validate(warehouseValidation.materialFilter), warehouseController.filterMaterials);
 export default router;
