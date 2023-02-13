@@ -45,25 +45,24 @@ export const create = async (req, res) => {
     }
 };
 
-const checkExistOrder = async (number_phone,licensePlates) => {
+const checkExistOrder = async (number_phone, licensePlates) => {
     try {
         const orders = await orderService.getAll({
             number_phone,
             licensePlates,
             status: { $nin: [0, 5] },
         });
-        return orders
+        return orders;
     } catch (error) {
-        return error
+        return error;
     }
-
-}
+};
 
 export const createOrderByCustomer = async (req, res) => {
     try {
         const { number_phone, licensePlates } = req.body;
         //check order da ton tai va dang trong qua trinh xu ly
-        const orders = await checkExistOrder(number_phone, licensePlates)
+        const orders = await checkExistOrder(number_phone, licensePlates);
         if (orders.length === 0) {
             const data = await orderService.create(req.body);
             res.status(200).json(data);
@@ -130,4 +129,11 @@ export const updateById = async (req, res) => {
             message: 'Đã có lỗi xảy ra cập nhật thất bại!',
         });
     }
+};
+
+export const getUserOrders = async (req, res) => {
+    try {
+        const data = await orderService.getUserOrders(req.params.accountId);
+        res.json(data);
+    } catch (error) {}
 };

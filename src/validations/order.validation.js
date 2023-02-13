@@ -64,3 +64,12 @@ export const createOrderByCustomer = {
         licensePlates: Joi.string().allow('', null),
     }),
 };
+
+export const updateByIdOrder = {
+    params: Joi.object().keys({
+        id: Joi.string().required(),
+    }),
+    body: Joi.object().keys({
+        status: Joi.number().required(),
+    }),
+};

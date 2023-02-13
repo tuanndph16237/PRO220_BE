@@ -1,54 +1,67 @@
 import _ from 'lodash';
 import mongoose from 'mongoose';
-import {
-    OrderModel
-} from "../models";
+import { accountController } from '../controllers';
+import { OrderModel } from '../models';
 
-export const getAll = async (filter = null) => {
+export const getAll = async(filter = { deleted: false }) => {
     return await OrderModel.find({
         ...filter,
-        deleted: false,
     });
-}
+};
 
-export const getById = async (_id, filter = {
-    deleted: false
-}) => {
+export const getById = async(
+    _id,
+    filter = {
+        deleted: false,
+    },
+) => {
     return await OrderModel.findOne({
         _id,
-        ...filter
+        ...filter,
     }).exec();
-}
+};
 
-export const create = async (data) => {
-    return await new OrderModel(data).save()
-}
+export const create = async(data) => {
+    return await new OrderModel(data).save();
+};
 
-export const removeById = async (_id, filter = {
-    deleted: false
-}) => {
+export const removeById = async(
+    _id,
+    filter = {
+        deleted: false,
+    },
+) => {
     const orderId = mongoose.Types.ObjectId(_id);
     return await OrderModel.findOneAndDelete({
         _id: orderId,
-        ...filter
-    }).exec()
-}
+        ...filter,
+    }).exec();
+};
 
-export const removeByIds = async (ids = []) => {
-    const result = ids.map(async (id) => {
+export const removeByIds = async(ids = []) => {
+    const result = ids.map(async(id) => {
         const orderById = await getById(id);
         if (!_.isEmpty(orderById)) {
-            removeById(id)
+            removeById(id);
         }
-    })
+    });
     return result;
-}
+};
 
-export const updateById = async (_id, data) => {
+export const updateById = async(_id, data) => {
     return await OrderModel.findOneAndUpdate({
-        _id,
-        deleted: false
-    }, data, {
-        new: true
-    })
-}
+            _id,
+            deleted: false,
+        },
+        data, {
+            new: true,
+        },
+    );
+};
+
+export const getUserOrders = async(id) => {
+    try {
+        const data = await OrderModel.find({ accountId: id });
+        return data;
+    } catch (error) {}
+};

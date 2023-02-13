@@ -1,11 +1,7 @@
 import express from 'express';
-import {
-    orderController
-} from '../controllers';
+import { orderController } from '../controllers';
 import validate from '../middlewares/validate';
-import {
-    orderValidation
-} from '../validations';
+import { orderValidation } from '../validations';
 
 const router = express.Router();
 
@@ -20,12 +16,14 @@ router.patch(
     validate(orderValidation.getById),
     orderController.updateById,
 );
+router.patch('/order-status/:id', validate(orderValidation.updateOrderStatus), orderController.updateById);
+//customer
+router.post('/order-by-customer', validate(orderValidation.createOrderByCustomer), orderController.create);
+router.get('/orders-customer/:accountId', orderController.getUserOrders);
 router.patch(
-    '/order-status/:id',
-    validate(orderValidation.updateOrderStatus),
+    '/orders-customer/:id',
+    validate(orderValidation.updateByIdOrder),
     orderController.updateById,
 );
-//customer
-router.post('/order-by-customer', validate(orderValidation.createOrderByCustomer), orderController.createOrderByCustomer);
 
 export default router;
