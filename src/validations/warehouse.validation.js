@@ -7,15 +7,35 @@ export const warehouseMaterial = {
             .items(
                 Joi.object({
                     materialId: Joi.string(),
-                    quantity: Joi.number(),
+                    qty: Joi.number(),
+                    price: Joi.number().allow('', null),
                 }),
             )
             .required(),
     }),
 };
 
+export const warehouseMaterialUpdateOne = {
+    body: Joi.object().keys({
+        idShowroom: Joi.string().required(),
+        material: Joi.object({
+            materialId: Joi.string(),
+            quantity: Joi.number(),
+        }).required(),
+    }),
+};
+
 export const warehouseIdShowroom = {
     params: Joi.object().keys({
         id: Joi.string().required(),
+    }),
+};
+
+export const materialFilter = {
+    query: Joi.object().keys({
+        showroomId: Joi.string().required(),
+    }),
+    body: Joi.object().keys({
+        name: Joi.string().required(),
     }),
 };
