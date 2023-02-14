@@ -13,6 +13,7 @@ import cookiesParser from 'cookie-parser';
 import routerAccount from './src/routes/acount.router';
 import routerWarehouse from './src/routes/warehouse.router';
 import routerDistrict from './src/routes/district.router';
+import routerPayment from './src/routes/paymentVnpay.router';
 const app = express();
 // const app = express();
 
@@ -25,7 +26,7 @@ app.use(cors({ origin: ['http://127.0.0.1:5173', 'http://localhost:3000'], crede
 app.options('*', cors());
 //use routers
 
-app.use('/api',routerPayment)
+app.use('/api', routerPayment);
 app.use('/api', BannerRouter);
 app.use('/api', orderRouter);
 app.use('/api', routerAccount);
