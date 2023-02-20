@@ -4,3 +4,4 @@ module.exports.showroomValidation = require('./showroom.validation');
 module.exports.BannerValidation = require('./banner.validation');
 module.exports.materialValidation = require('./materials.validation');
 module.exports.warehouseValidation = require('./warehouse.validation');
+module.exports.DistrictValidation = require('./district.validation')

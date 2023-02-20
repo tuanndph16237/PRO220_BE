@@ -16,11 +16,6 @@ router.patch(
     validate(orderValidation.getById),
     orderController.updateById,
 );
-router.put(
-    '/orders/:id',
-    validate(orderValidation.getById),
-    orderController.updateById,
-);
 router.patch('/order-status/:id', validate(orderValidation.updateOrderStatus), orderController.updateById);
 //customer
 router.post('/order-by-customer', validate(orderValidation.createOrderByCustomer), orderController.create);
