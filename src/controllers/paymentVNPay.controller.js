@@ -1,9 +1,10 @@
 import dateFormat from 'dateformat';
 import queryStrings from 'qs';
 import crypto from 'crypto';
+import nodemailer from 'nodemailer';
 
 export const Payment = async (req, res) => {
-    const { amount, bankCode, orderInfo, orderType, locale = 'vn' } = req.body;
+    const { amount, bankCode, orderInfo, orderType, locale = 'vn',idOrder } = req.body;
     const ipAddr =
         req.headers['x-forwarded-for'] ||
         req.connection.remoteAddress ||
@@ -24,14 +25,13 @@ export const Payment = async (req, res) => {
     vnp_Params['vnp_OrderInfo'] = orderInfo;
     vnp_Params['vnp_OrderType'] = orderType;
     vnp_Params['vnp_Amount'] = +amount * 100;
-    vnp_Params['vnp_ReturnUrl'] = process.env.VNP_RETURNURL;
-    vnp_Params['vnp_IpAddr'] = ipAddr;
+    vnp_Params['vnp_ReturnUrl'] = `http://localhost:3000/admin/don-hang/${idOrder}`;
+    vnp_Params['vnp_IpAddr'] = '14.248.101.1';
     vnp_Params['vnp_CreateDate'] = createDate;
     if (bankCode !== null && bankCode !== '') {
         vnp_Params['vnp_BankCode'] = bankCode;
     }
     vnp_Params = sortObject(vnp_Params);
-    console.log('vnp_Params', vnp_Params);
     const signData = queryStrings.stringify(vnp_Params, { encode: false });
     const hmac = crypto.createHmac('sha512', process.env.VNP_HASHSECRET);
     const signed = hmac.update(new Buffer(signData, 'utf-8')).digest('hex');
@@ -83,6 +83,90 @@ export const vnpay_Ipn = (req, res, next) => {
     } else {
         res.status(200).json({ RspCode: '97', Message: 'Fail checksum' });
     }
+};
+
+export const SendMail = async (req, res) => {
+    const {serviceType,materials,total,_id,email} =req.body
+    const Bill = materials.map((item,index)=>{
+        return `
+            <tr>
+                <td><span style="padding: 10px;display: block;">${index}</span></td>
+                <td><span style="padding: 10px;display: block;">Nhông sên dĩa DID Dream AD3 </span></td>
+                <td><span style="padding: 10px;display: block;"> ${item.qty} </span></td>
+                <td><span style="padding: 10px;display: block;"> ${item.price} </span></td>
+                <td><span style="padding: 10px;display: block;"> ${(item.price*item.qty)} </span></td>
+            </tr>
+        `
+    }).join("")
+    let transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
+        auth: { 
+            user: 'huyndph14652@fpt.edu.vn',
+            pass: 'upphlixzjrebbmxz',
+        },
+        tls: {
+            rejectUnauthorized: false,
+        },
+    });
+    const option = {
+        from: 'huyndph14652@fpt.edu.vn',
+        to: email,
+        subject: 'Dịch Vụ Đặt Lịch Sửa Xe Dodoris',
+        html: ` 
+            <div style="width: 100%; background: #f2f2f2; position: relative; padding: 30px">
+                <div style="padding: 20px; width: 600px; background: white">
+                    <div>
+                        <div style="display: flex">
+                            <img
+                                style="width: 50px"
+                                src="https://res.cloudinary.com/df6zs06nu/image/upload/v1676394303/myLogo_nxb70g.png"
+                                alt=""
+                            />
+                            <p style="margin-left: 10px; font-weight: 800; color: #02b875; font-family: sans-serif">
+                                DODORIS
+                            </p>
+                        </div>
+                        <p>- Xin chào quý khách,</p>
+                        <p>
+                            - Dịch vụ sửa xe Dodoris rất vui thông báo đơn hàng #${_id} của quý khách đã được giao thành
+                            công ngày 02/02/2023.
+                        </p>
+                        <p>- Dịch vụ : ${serviceType==0?'Bảo dưỡng tại nhà':'Bảo dưỡng tại cửa hàng'}</p>
+                        <p>- Thông tin chi tiết đơn hàng :</p>
+                    </div>
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th><span style="padding: 10px;display: block;">STT</span></th>
+                                <th><span style="padding: 10px;display: block;">Tên Sản Phẩm</span></th>
+                                <th><span style="padding: 10px;display: block;">Số lượng</span></th>
+                                <th><span style="padding: 10px;display: block;">Giá</span></th>
+                                <th><span style="padding: 10px;display: block;">Tổng Giá</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           ${Bill}
+                            <tr>
+                                <td colspan="5">
+                                    <span style="padding: 10px;display: block;">Tổng Đơn Hàng : ${total} VNĐ</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>- Cảm ơn quý khách đã tin tưởng dịch vụ sửa chữa DODORIS</p>
+                </div>
+            </div>
+        `,
+    };
+    return transporter.sendMail(option, (err, info) => {
+        if (err) {
+            return console.log(err);
+        }
+
+        res.json({ status: info.response });
+    });
 };
 
 function sortObject(obj) {

@@ -1,13 +1,14 @@
 import { string } from 'joi';
 import mongoose from 'mongoose';
-const districtSchema = mongoose.Schema(
-    {
-        name: {
-            type: String,
-        },
+const districtSchema = mongoose.Schema({
+    name: {
+        type: String,
     },
-    { timestamps: true },
-);
+    isDeleted: {
+        type: Boolean,
+        default: true
+    }
+}, { timestamps: true }, );
 
 const districtModel = mongoose.model('District', districtSchema);
 
