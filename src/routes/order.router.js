@@ -6,6 +6,7 @@ import { orderValidation } from '../validations';
 const router = express.Router();
 
 router.get('/orders', orderController.getAll);
+router.post('/orders-filter', orderController.getAll);
 router.get('/orders/:id', validate(orderValidation.getById), orderController.getById);
 router.post('/orders', validate(orderValidation.createOrder), orderController.create);
 router.delete('/orders/:id', validate(orderValidation.getById), orderController.removeById);

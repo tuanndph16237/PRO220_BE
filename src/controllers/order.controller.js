@@ -10,11 +10,12 @@ export const getAll = async (req, res) => {
         if (showroomId) {
             const data = await orderService.getAll({
                 showroomId,
+                ...req.body,
             });
             res.json(data);
             return;
         }
-        const data = await orderService.getAll();
+        const data = await orderService.getAll(req.body);
         res.json(data);
     } catch (errors) {
         res.status(400).json({
