@@ -7,7 +7,7 @@ export const getAll = async () => {
 };
 
 export const getById = async (_id) => {
-    return await accountServiceModel.findOne({ _id }).exec();
+    return await accountServiceModel.findOne({ _id }).populate('role').exec();
 };
 
 export const create = async (data) => {
@@ -26,5 +26,5 @@ export const getPhone = async (data) => {
     return await accountServiceModel.findOne({ number_phone: data });
 };
 export const search = async (filter = null) => {
-    return accountServiceModel.findOne({ ...filter, ...baseFilter });
+    return await accountServiceModel.findOne({ ...filter, ...baseFilter }).populate('role');
 };

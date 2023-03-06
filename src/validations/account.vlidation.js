@@ -7,7 +7,7 @@ export const createAccount = {
         password: Joi.string().required(),
         number_phone: Joi.number().required(),
         image: Joi.string().required(),
-        role: Joi.number(),
+        role: Joi.string().allow(''),
     }),
 };
 
@@ -18,6 +18,7 @@ export const register = {
         email: Joi.string().allow(''),
         password: Joi.string().required(),
         image: Joi.string().allow(''),
+        role: Joi.string().allow(''),
     }),
 };
 

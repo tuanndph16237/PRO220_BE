@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 const accountSchema = mongoose.Schema(
     {
@@ -20,11 +20,12 @@ const accountSchema = mongoose.Schema(
         image: {
             type: String,
         },
-        showroomId:{
-            type:String,
+        showroomId: {
+            type: String,
         },
         role: {
-            type: Number,
+            type: Schema.Types.ObjectId,
+            ref: 'Role',
         },
     },
     { timestamps: true },
