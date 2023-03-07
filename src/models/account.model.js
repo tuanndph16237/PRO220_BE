@@ -20,11 +20,15 @@ const accountSchema = mongoose.Schema(
         image: {
             type: String,
         },
-        showroomId:{
-            type:String,
+        showroomId: {
+            default: null,
+            type: mongoose.ObjectId,
+            ref: 'Showroom',
         },
-        role: {
-            type: Number,
+        roleId: {
+            default: null,
+            type: mongoose.ObjectId,
+            ref: 'Role',
         },
     },
     { timestamps: true },

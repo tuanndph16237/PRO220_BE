@@ -5,7 +5,8 @@ import { STATUS_TYPE } from '../constans/status';
 
 export const getAll = async (req, res) => {
     try {
-        const data = await accountServices.getAll();
+        console.log(222222, req.params);
+        const data = await accountServices.getAll(req.body);
         res.json(data);
     } catch (error) {
         res.status(400).json({

@@ -2,8 +2,11 @@ import { accountServiceModel } from '../models';
 
 const baseFilter = { deleted: false };
 
-export const getAll = async () => {
-    return accountServiceModel.find();
+export const getAll = async (filter) => {
+    return accountServiceModel.find({
+        ...baseFilter,
+        ...filter,
+    });
 };
 
 export const getById = async (_id) => {
