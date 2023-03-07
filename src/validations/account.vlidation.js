@@ -18,6 +18,7 @@ export const register = {
         email: Joi.string().allow(''),
         password: Joi.string().required(),
         image: Joi.string().allow(''),
+        role: Joi.string().allow(''),
     }),
 };
 
