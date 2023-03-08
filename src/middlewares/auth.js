@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken'
+import { roleService } from '../services';
 
 export const verifyToken=(req,res,next)=>{
     const token = req.headers.token
@@ -18,9 +19,14 @@ export const verifyToken=(req,res,next)=>{
     }
 }
 
-export const verifyAndAdminAuth = (req,res,next)=>{
+export const verifyAndAdminAuth = async (req,res,next)=>{
+    const listRole = await roleService.listRole()
+    let arr = []
+    listRole.forEach(element => {
+        arr.push(element.name)
+    });
     verifyToken(req,res,()=>{
-        if ([1,2].includes(req.user.role)) {
+        if (arr.includes(req.user.role)) {
             req.user = req.user
             next()
         }else{
