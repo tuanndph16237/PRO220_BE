@@ -5,8 +5,10 @@ import { STATUS_TYPE } from '../constans/status';
 
 export const getAll = async (req, res) => {
     try {
-        console.log(222222, req.params);
-        const data = await accountServices.getAll(req.body);
+        const existsRoleId = {
+            roleId: { $exists: true },
+        };
+        const data = await accountServices.getAll({ ...existsRoleId, ...req.body });
         res.json(data);
     } catch (error) {
         res.status(400).json({
