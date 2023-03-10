@@ -16,6 +16,7 @@ import routerDistrict from './src/routes/district.router';
 import routerPayment from './src/routes/paymentVnpay.router';
 import routerRole from './src/routes/role.router';
 import routerPermission from './src/routes/permission.router';
+import routerPost from './src/routes/post.router';
 
 const app = express();
 // const app = express();
@@ -40,6 +41,7 @@ app.use('/api', routerWarehouse);
 app.use('/api', routerDistrict);
 app.use('/api', routerRole);
 app.use('/api', routerPermission);
+app.use('/api', routerPost);
 
 // parse urlencoded request body
 app.use(

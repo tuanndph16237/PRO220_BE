@@ -7,3 +7,4 @@ module.exports.warehouseModel = require('./warehouse.model');
 module.exports.districtModel = require('./district.model');
 module.exports.permissionModel = require('./permissions.model');
 module.exports.roleModel = require('./roles.model');
+module.exports.PostModel = require('./post.model');

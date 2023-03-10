@@ -8,3 +8,4 @@ module.exports.warehouseController = require('./warehouse.controller');
 module.exports.districtController = require('./district.controller');
 module.exports.roleController = require('./role.controller');
 module.exports.permissionController = require('./permission.controller');
+module.exports.PostController = require('./post.controller');

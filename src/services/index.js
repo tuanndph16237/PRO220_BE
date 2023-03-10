@@ -7,3 +7,4 @@ module.exports.warehouseService = require('./warehouse.service');
 module.exports.districtService = require('./district.service');
 module.exports.roleService = require('./role.service');
 module.exports.permissionService = require('./permission.service');
+module.exports.PostService = require('./post.service');
