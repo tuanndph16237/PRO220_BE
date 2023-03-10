@@ -25,7 +25,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        const checkPhoneNumber = await accountServices.search({ number_phone: req.body.number_phone });
+        let checkPhoneNumber = await accountServices.search({ number_phone: req.body.number_phone });
         if (!checkPhoneNumber) {
             return res.json({
                 message: 'Tài khoản chưa tồn tại trong hệ thống!',
@@ -36,6 +36,9 @@ export const login = async (req, res) => {
             return res.json({
                 message: 'Mật khẩu sai vui lòng nhập lại!',
             });
+        }
+        if (checkPhoneNumber.roleId) {
+            checkPhoneNumber = await accountServices.getUserRole({ number_phone: req.body.number_phone });
         }
         const accessToken = generateAccessToken(checkPhoneNumber);
         // const refreshToken = generateRefreshToken(checkPhoneNumber);

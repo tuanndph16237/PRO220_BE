@@ -29,5 +29,9 @@ export const getPhone = async (data) => {
     return await accountServiceModel.findOne({ number_phone: data });
 };
 export const search = async (filter = null) => {
+    return await accountServiceModel.findOne({ ...filter, ...baseFilter });
+};
+
+export const getUserRole = async (filter = null) => {
     return await accountServiceModel.findOne({ ...filter, ...baseFilter }).populate('roleId');
 };
