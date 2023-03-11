@@ -25,8 +25,8 @@ export const Payment = async (req, res) => {
     vnp_Params['vnp_OrderInfo'] = orderInfo;
     vnp_Params['vnp_OrderType'] = orderType;
     vnp_Params['vnp_Amount'] = +amount * 100;
-    vnp_Params['vnp_ReturnUrl'] = `http://localhost:3000/admin/don-hang/${idOrder}`;
-    vnp_Params['vnp_IpAddr'] = '14.248.101.1';
+    vnp_Params['vnp_ReturnUrl'] = `${process.env.HOST}cai-dat/quan-ly-don-hang/${idOrder}`;
+    vnp_Params['vnp_IpAddr'] = ipAddr;
     vnp_Params['vnp_CreateDate'] = createDate;
     if (bankCode !== null && bankCode !== '') {
         vnp_Params['vnp_BankCode'] = bankCode;

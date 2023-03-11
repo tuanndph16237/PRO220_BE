@@ -27,13 +27,13 @@ export const login = async (req, res) => {
     try {
         let checkPhoneNumber = await accountServices.search({ number_phone: req.body.number_phone });
         if (!checkPhoneNumber) {
-            return res.json({
+            return res.status(400).json({
                 message: 'Tài khoản chưa tồn tại trong hệ thống!',
             });
         }
         const comparePassword = bcyrpt.compareSync(req.body.password, checkPhoneNumber.password);
         if (!comparePassword) {
-            return res.json({
+            return res.status(400).json({
                 message: 'Mật khẩu sai vui lòng nhập lại!',
             });
         }
