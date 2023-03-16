@@ -12,7 +12,7 @@ export const register = async (req, res) => {
             const data = await accountServices.create({ ...req.body, password: passwordVerify });
             return res.status(200).json({ data, message: 'Tạo tài khoản thành công!' });
         }
-        res.status(200).json({
+        res.status(400).json({
             message: 'Tài khoản đã tồn tại trong hệ thống!',
         });
     } catch (error) {
