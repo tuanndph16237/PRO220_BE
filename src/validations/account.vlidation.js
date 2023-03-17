@@ -7,7 +7,7 @@ export const createAccount = {
         password: Joi.string().required(),
         number_phone: Joi.number().required(),
         roleId: Joi.string().required(),
-        showroomId: Joi.string().required(),
+        showroomId: Joi.string(),
     }),
 };
 
