@@ -56,8 +56,9 @@ export const getById = async (req, res) => {
 
 export const create = async (req, res) => {
     try {
-        if (req.body.accountId != null) {
-            const data = await orderService.create({ ...req.body, accountId: req.body.accountId });
+        const phone = await checkPhone(req.body.number_phone);
+        if (phone != null) {
+            const data = await orderService.create({ ...req.body, accountId: phone._id });
             res.status(200).json(data);
         } else {
             const dataAcc = await accountServices.create({
@@ -261,7 +262,7 @@ export const getOrderRevenua = async (req, res) => {
 export const checkPhoneInSystem = async (req, res) => {
     try {
         const phone = await checkPhone(req.body.number_phone);
-        if (null) {
+        if (phone == null) {
             res.status(200).json({
                 isPhoneInSystem: false,
             });

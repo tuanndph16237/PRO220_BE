@@ -3,6 +3,9 @@ const serviceSchema = mongoose.Schema({
     serviceName: {
         type: String,
     },
+    icon: {
+        type: String,
+    },
     serviceTypes: {
         type: [
             {
